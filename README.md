@@ -110,6 +110,21 @@ Built-in services: `app`, `nginx`, `caddy`, `mysql`, `pgsql`, `redis`, `meilisea
 | `environments:up` | `docker compose up` wrapper |
 | `environments:down` | `docker compose down` wrapper |
 
+## Laravel Boost
+
+This package ships [Laravel Boost](https://laravel.com/docs/boost) AI guidelines and an agent skill so coding agents understand how to install, generate, and extend environments when the package is present:
+
+- Guideline: `resources/boost/guidelines/core.blade.php` (always-on via `boost:install`)
+- Skill: `resources/boost/skills/laravel-environments-development/SKILL.md` (on-demand)
+
+In an application with Boost installed:
+
+```bash
+php artisan boost:install
+# or later:
+php artisan boost:update --discover
+```
+
 ## Quality
 
 ```bash
