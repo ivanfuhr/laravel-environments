@@ -1,0 +1,88 @@
+{
+    "name": "ivanfuhr/laravel-environments",
+    "description": "Extensible Docker Compose environments for Laravel development and production.",
+    "keywords": [
+        "php",
+        "laravel",
+        "docker",
+        "docker-compose",
+        "environments",
+        "sail"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Führ",
+            "email": "dev.ivanfuhr@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3.0",
+        "illuminate/console": "^11.44.2|^12.52.0|^13.0",
+        "illuminate/contracts": "^11.44.2|^12.52.0|^13.0",
+        "illuminate/support": "^11.44.2|^12.52.0|^13.0",
+        "symfony/process": "^7.0|^8.0",
+        "symfony/yaml": "^7.0|^8.0"
+    },
+    "require-dev": {
+        "laravel/framework": "^11.44.2|^12.52.0|^13.0",
+        "laravel/pint": "^1.29.0",
+        "orchestra/testbench": "^9.0|^10.9.0|^11.1",
+        "phpstan/phpstan": "^2.1.50",
+        "phpunit/phpunit": "^11.5.0|^12.0",
+        "rector/rector": "^2.4.2"
+    },
+    "bin": [
+        "bin/environments"
+    ],
+    "autoload": {
+        "psr-4": {
+            "IvanFuhr\\LaravelEnvironments\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IvanFuhr\\LaravelEnvironments\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "pint": "pint --parallel",
+        "format": "@pint",
+        "test:lint": "pint --parallel --test",
+        "phpstan": "phpstan analyse --ansi --memory-limit=512M",
+        "analyse": "@phpstan",
+        "test:types": "@phpstan",
+        "rector": "rector",
+        "test:refactor": "rector --dry-run",
+        "test": "phpunit --colors=always",
+        "coverage": "bash scripts/coverage.sh",
+        "moat": "bash scripts/moat.sh",
+        "check": [
+            "@test:refactor",
+            "@test:lint",
+            "@test:types",
+            "@test"
+        ],
+        "ci": [
+            "@check",
+            "@coverage",
+            "@moat"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IvanFuhr\\LaravelEnvironments\\EnvironmentsServiceProvider"
+            ],
+            "aliases": {
+                "Environments": "IvanFuhr\\LaravelEnvironments\\Facades\\Environments"
+            }
+        }
+    }
+}

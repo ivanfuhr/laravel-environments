@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Thin wrapper inspired by Laravel Sail. Prefer Artisan commands when available.
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+if [[ -f "$ROOT/artisan" ]]; then
+  php "$ROOT/artisan" environments:"${1:-generate}" "${@:2}"
+  exit $?
+fi
+
+COMPOSE_FILE="${ENVIRONMENTS_COMPOSE_FILE:-docker-compose.yml}"
+
+case "${1:-}" in
+  up) shift; docker compose -f "$COMPOSE_FILE" up "$@" ;;
+  down) shift; docker compose -f "$COMPOSE_FILE" down "$@" ;;
+  *)
+    echo "Usage: environments <up|down|generate|install|publish> [args...]"
+    exit 1
+    ;;
+esac

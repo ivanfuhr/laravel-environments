@@ -1,0 +1,16 @@
+* text=auto eol=lf
+*.md diff=markdown
+*.php diff=php
+LICENSE.md export-ignore
+.gitignore export-ignore
+.phpunit.cache export-ignore
+.phpunit.result.cache export-ignore
+phpunit.xml.dist export-ignore
+.php-cs-fixer.cache export-ignore
+pint.json export-ignore
+psalm.xml export-ignore
+psalm.xml.dist export-ignore
+testbench.yaml export-ignore
+/.github export-ignore
+/tests export-ignore
+/coverage export-ignore

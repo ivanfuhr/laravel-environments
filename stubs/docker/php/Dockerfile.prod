@@ -1,0 +1,25 @@
+ARG PHP_VERSION=8.4
+FROM php:${PHP_VERSION}-fpm-bookworm AS vendor
+WORKDIR /app
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY composer.json composer.lock* ./
+RUN composer install --no-dev --prefer-dist --no-scripts --no-interaction --no-progress || composer install --no-dev --prefer-dist --no-scripts --no-interaction --no-progress --ignore-platform-reqs
+
+FROM php:${PHP_VERSION}-fpm-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libzip-dev libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip bcmath pcntl opcache \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/html
+COPY --from=vendor /app/vendor ./vendor
+COPY . .
+COPY docker/php/entrypoint.prod.sh /usr/local/bin/entrypoint
+RUN chmod +x /usr/local/bin/entrypoint \
+    && chown -R www-data:www-data storage bootstrap/cache || true
+
+USER www-data
+ENTRYPOINT ["entrypoint"]
+CMD ["php-fpm"]

@@ -1,0 +1,8 @@
+/.idea
+/.vscode
+/.phpunit.cache
+/vendor
+/coverage
+.phpunit.result.cache
+.php-cs-fixer.cache
+auth.json
