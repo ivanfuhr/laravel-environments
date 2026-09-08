@@ -85,10 +85,10 @@ final class CoverageEdgeCasesTest extends TestCase
 
         $this->expectException(InvalidConfigurationException::class);
 
-        new ComposeBuilder(
+        (new ComposeBuilder(
             $this->app->make(ServiceRegistry::class),
             config('environments'),
-        )->build('broken');
+        ))->build('broken');
     }
 
     public function test_builder_falls_back_when_nested_config_keys_are_missing(): void

@@ -6,3 +6,10 @@ release_branches = ["main"]
 [checks]
 # Signed commits are recommended but not required for all contributors on this package.
 repositories_commits_are_signed = "off"
+
+# Personal GitHub accounts cannot set "require approval for all external contributors"
+# via API (org-only). Enable it manually once at:
+# https://github.com/ivanfuhr/laravel-environments/settings/actions
+# (Fork pull request workflows → Require approval for all external contributors)
+# Then remove this override.
+repositories_fork_pull_requests_require_approval = "off"
