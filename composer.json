@@ -1,14 +1,16 @@
 {
     "name": "ivanfuhr/laravel-environments",
-    "description": "Extensible Docker Compose environments for Laravel development and production.",
+    "description": "DEPRECATED — abandoned. Prefer Laravel Sail or hand-maintained Docker Compose.",
     "keywords": [
         "php",
         "laravel",
         "docker",
         "docker-compose",
         "environments",
-        "sail"
+        "sail",
+        "deprecated"
     ],
+    "abandoned": true,
     "license": "MIT",
     "authors": [
         {

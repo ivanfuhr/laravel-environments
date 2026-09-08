@@ -1,6 +1,10 @@
 # Laravel Environments
 
-Extensible Docker Compose environments for Laravel — development **and** production.
+> **Deprecated / abandoned.** This package is no longer maintained.  
+> Prefer [Laravel Sail](https://github.com/laravel/sail) for local Docker, or a project-owned Compose setup for production.  
+> Do not start new projects on `ivanfuhr/laravel-environments`.
+
+~~Extensible Docker Compose environments for Laravel — development **and** production.~~
 
 Inspired by [Laravel Sail](https://github.com/laravel/sail), but designed as a proper package with a service registry so third parties can register drivers/services, and with first-class production profiles (workers, SSL, replicas, healthchecks).
 
